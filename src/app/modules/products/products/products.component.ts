@@ -12,8 +12,15 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   searchTerm: string = '';
+  filters = {
+    category: '',
+    minPrice: null,
+    maxPrice: null,
+    minDuration: null,
+    maxDuration: null,
+  };
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit() {
     this.productService.getProducts().subscribe((data: Product[]) => {
@@ -29,6 +36,16 @@ export class ProductsComponent implements OnInit {
     this.filteredProducts = this.products.filter(product =>
       product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
+  }
+
+  applyFilters() {
+    this.filteredProducts = this.products.filter(product => {
+      return (!this.filters.category || product.category === this.filters.category) &&
+        (this.filters.minPrice == null || product.price >= this.filters.minPrice) &&
+        (this.filters.maxPrice == null || product.price <= this.filters.maxPrice) &&
+        (this.filters.minDuration == null || product.duration >= this.filters.minDuration) &&
+        (this.filters.maxDuration == null || product.duration <= this.filters.maxDuration);
+    });
   }
 
   addToCart(product: Product) {

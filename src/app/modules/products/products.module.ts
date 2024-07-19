@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule
   ],
   exports: [
     ProductsComponent
