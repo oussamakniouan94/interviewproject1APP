@@ -18,7 +18,11 @@
         </div>
     </div>
 
-    <form (ngSubmit)="onSubmit()" #checkoutForm="ngForm">
+    <div *ngIf="!isLoggedIn">
+        <button (click)="loginWithGoogle()" class="btn">Login with Google</button>
+    </div>
+
+    <form *ngIf="isLoggedIn" (ngSubmit)="onSubmit()" #checkoutForm="ngForm">
         <div class="form-group">
             <label for="shipping_name">Name</label>
             <input type="text" id="shipping_name" [(ngModel)]="order.shipping_name" name="shipping_name" required>

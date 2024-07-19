@@ -8,7 +8,7 @@ import { Order } from '../entities/order';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = environment.baseUrl + 'orders';
+  private apiUrl = environment.baseUrl + '/orders';
 
   constructor(private http: HttpClient) {}
 
@@ -17,6 +17,6 @@ export class OrderService {
   }
 
   getOrderById(id: string): Observable<Order> {
-    return this.http.get<Order>(environment.baseUrl + 'orders/' + id);
+    return this.http.get<Order>(environment.baseUrl + '/orders/' + id);
   }
 }
