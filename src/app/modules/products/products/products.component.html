@@ -1,0 +1,16 @@
+<section class="product-list">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+        <div class="product-card" *ngFor="let product of products">
+            <img [src]="product.image" alt="{{product.name}}">
+            <div class="product-info">
+                <h3>{{product.name}}</h3>
+                <p>{{product.description}}</p>
+                <p class="price">Price: ${{product.price}}</p>
+                <p class="duration">Duration: {{product.duration}} mins</p>
+                <a routerLink="/product/{{product.id}}" class="btn">View Details</a>
+                <button (click)="addToCart(product)" class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</section>
