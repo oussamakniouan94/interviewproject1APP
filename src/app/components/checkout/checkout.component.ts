@@ -45,6 +45,18 @@ export class CheckoutComponent implements OnInit {
     this.order.items = this.items;
     this.order.total = this.items.reduce((acc, item) => acc + item.price, 0);
 
+    const storedItems = localStorage.getItem('cartItems');
+    if (storedItems) {
+      this.items = JSON.parse(storedItems);
+      this.order.items = this.items;
+      this.order.total = this.items.reduce((acc, item) => acc + item.price, 0);
+      localStorage.removeItem('cartItems');
+    } else {
+      this.items = this.cartService.getItems();
+      this.order.items = this.items;
+      this.order.total = this.items.reduce((acc, item) => acc + item.price, 0);
+    }
+
     this.handleTokenFromUrl();
 
     try {
@@ -88,6 +100,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   loginWithGoogle(): void {
+    localStorage.setItem('cartItems', JSON.stringify(this.items));
     this.authService.loginWithGoogle();
   }
 
@@ -106,7 +119,7 @@ export class CheckoutComponent implements OnInit {
         console.log("this.cardElement", this.cardElement)
         if (!stripe || !this.elements || !this.cardElement) throw new Error('Stripe.js or elements failed to load.');
 
-        const response = await this.http.post<{ clientSecret?: string }>(environment.baseUrl+'/payment-intent', {
+        const response = await this.http.post<{ clientSecret?: string }>(environment.baseUrl + '/payment-intent', {
           amount: this.order.total * 100,
         }).toPromise();
 
