@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OrderService } from '../../services/order.service'; // Assume you have a service to fetch order details
+import { OrderService } from '../../services/order.service';
 import { Order } from '../../entities/order';
 import { Product } from '../../entities/product';
 

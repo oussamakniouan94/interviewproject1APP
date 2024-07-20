@@ -129,7 +129,6 @@ export class CheckoutComponent implements OnInit {
           throw new Error('Failed to get client secret from backend.');
         }
 
-        // Confirm the payment with the client secret
         const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
           payment_method: {
             card: this.cardElement,
