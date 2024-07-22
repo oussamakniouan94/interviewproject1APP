@@ -33,9 +33,16 @@ export class ProductsComponent implements OnInit {
   }
 
   searchProducts() {
-    this.filteredProducts = this.products.filter(product =>
-      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    if (this.searchTerm) {
+      this.productService.searchProducts(this.searchTerm).subscribe((data: Product[]) => {
+        this.filteredProducts = data.map(product => ({
+          ...product,
+          image: `../../${product.image}`
+        }));
+      });
+    } else {
+      this.filteredProducts = this.products;
+    }
   }
 
   applyFilters() {

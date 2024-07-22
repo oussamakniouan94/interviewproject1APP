@@ -50,6 +50,14 @@
             <div class="col-md-12 text-center">
                 <button (click)="applyFilters()" class="btn btn-primary filter-btn">Apply Filters</button>
             </div>
+            <div class="col-md-12 mb-3 search">
+                <div class="filter-group search-group">
+                    <label for="searchTerm" class="filter-label">Search:</label>
+                    <input type="text" id="searchTerm" [(ngModel)]="searchTerm" class="form-control"
+                        placeholder="Search products...">
+                    <i class="fa fa-search search-icon" (click)="searchProducts()"></i>
+                </div>
+            </div>
         </div>
     </div>
 </section>

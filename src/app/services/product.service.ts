@@ -20,15 +20,7 @@ export class ProductService {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
-  }
-
-  updateProduct(id: number, product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, product);
-  }
-
-  deleteProduct(id: number): Observable<Product> {
-    return this.http.delete<Product>(`${this.apiUrl}/${id}`);
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.baseUrl}/search?query=${query}`);
   }
 }
